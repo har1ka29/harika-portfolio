@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <style>
+    /* ---------- RESPONSIVE LAYOUT ---------- */
+
+/* Tablets & smaller laptops */
+@media (max-width: 900px) {
+  header {
+    padding: 10px 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  section {
+    padding: 90px 20px 40px;
+  }
+
+  .projects-container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .project-card {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .project-media {
+    width: 100%;
+  }
+
+  .project-content {
+    padding: 20px;
+  }
+
+  .skills-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  nav {
+    justify-content: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  #home h1 {
+    font-size: 2.1rem;
+    white-space: normal;
+  }
+
+  #home p {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  #about {
+    flex-direction: column;
+    padding: 90px 20px 40px;
+    text-align: left;
+  }
+
+  .certificate-slider {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .skills-wrapper {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .skill-item img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .project-card {
+    margin: 0 0 30px 0;
+  }
+}
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #2c3e50;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #2c3e50;
+      padding: 15px 40px;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .logo {
+  color: #ecf0f1;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+}
+
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    nav a {
+      color: #ecf0f1;
+      text-decoration: none;
+      font-weight: 600;
+      padding-bottom: 5px;
+    }
+
+    nav a:hover {
+      color: #f39c12;
+      border-bottom: 2px solid #f39c12;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 100px 60px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #home {
+      background: linear-gradient(120deg, #3498db, #9b59b6);
+      color: #fff;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    /* About Section */
+    #about {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      background: #ecf0f1;
+      text-align: left;
+    }
+
+    #about img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #about .about-text {
+      max-width: 600px;
+    }
+
+    #about .about-text h2 {
+      margin-bottom: 15px;
+    }
+
+    /* Skills Section */
+    #skills {
+      background: #f8f9fa;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      max-width: 700px;
+    }
+
+    .skill {
+      background: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+      color: #f39c12;
+    }
+
+    .skill-item img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+
+    /* Certificates section */
+    .certificate-slider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      margin: 40px auto;
+      max-width: 1400px;
+    }
+
+    .certificate {
+      text-align: center;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      flex: 1;
+      max-width: 1000px;
+      text-decoration: underline;
+    }
+
+    .certificate h3 {
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      color: #2c3e50;
+      text-align: center;
+    }
+
+    .certificate img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      display: block;
+    }
+
+    .arrow {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #2c3e50;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s;
+    }
+
+    .arrow:hover {
+      color: #3498db;
+    }
+
+    /* Projects Section */
+    #projects {
+      background: #f8f9fa;
+      padding: 50px 20px;
+    }
+
+    #projects h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+      color: #2c3e50;
+    }
+
+    /* Project Container */
+    .projects-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Individual Project Card */
+    .project-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      max-width: 1500px;
+      margin: 0 auto;
+      min-height: 450px;
+      align-items: stretch;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+    }
+
+    /* Image area inside project card */
+    .project-media {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .project-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Text area */
+    .project-content {
+      padding: 30px;
+      flex: 1;
+    }
+
+    .project-content h3 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      color: #34495e;
+    }
+
+    .project-content p {
+      font-size: 1rem;
+      margin: 20px 0;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    /* Download Button */
+    .download-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 18px;
+      border: 2px solid #2c3e50;
+      border-radius: 6px;
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .download-btn:hover {
+      background: #2c3e50;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Harika Polisetti</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#projects">Projects</a>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h1 id="introText"></h1>
+    <p id="subText">Welcome to my digital space...</p>
+  </section>
+
+  <style>
+    #home {
+      background: linear-gradient(120deg, #3498db, #9b59b6);
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #home h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      white-space: nowrap;
+      border-right: 3px solid #fff;
+      width: fit-content;
+      overflow: hidden;
+    }
+
+    #home p {
+      font-size: 1.2rem;
+      margin-top: 15px;
+      opacity: 0.9;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #home {
+      background: linear-gradient(270deg, #3498db, #9b59b6, #f39c12);
+      background-size: 600% 600%;
+      animation: gradientShift 12s ease infinite;
+    }
+  </style>
+
+  <script>
+    const phrases = [
+      "Hi, I'm Harika",
+      "I'm a Year 2 Business & Financial Technology Student",
+      "Passionate about FinTech",
+      "Exploring AI & Analytics"
+    ];
+
+    let i = 0;
+    let j = 0;
+    let currentPhrase = [];
+    let isDeleting = false;
+    let isEnd = false;
+
+    function loop() {
+      const introText = document.getElementById("introText");
+
+      isEnd = false;
+      introText.innerHTML = currentPhrase.join("");
+
+      if (i < phrases.length) {
+        if (!isDeleting && j <= phrases[i].length) {
+          currentPhrase.push(phrases[i][j]);
+          j++;
+          introText.innerHTML = currentPhrase.join("");
+        }
+
+        if (isDeleting && j <= phrases[i].length) {
+          currentPhrase.pop(phrases[i][j]);
+          j--;
+          introText.innerHTML = currentPhrase.join("");
+        }
+
+        if (j == phrases[i].length) {
+          isEnd = true;
+          isDeleting = true;
+        }
+
+        if (isDeleting && j === 0) {
+          currentPhrase = [];
+          isDeleting = false;
+          i++;
+          if (i == phrases.length) {
+            i = 0;
+          }
+        }
+      }
+      const speed = isEnd ? 2000 : isDeleting ? 50 : 150;
+      setTimeout(loop, speed);
+    }
+
+    loop();
+  </script>
+
+  <section id="about">
+    <div class="about-text">
+      <h2>About Me</h2>
+      <p>
+        Hi, I am Harika, a 2nd year Business & Financial Technology student in Nanyang Polytechnic.
+        I am passionate about both technology and finance. These interests allow me to leverage
+        technologies that are prevalent in both industries, such as blockchain, data visualization
+        and data management.
+      </p>
+
+      <p>
+        Beyond technical skills, I am motivated by problem-solving, continuous learning, and the
+        opportunity to contribute to meaningful projects. I thrive in collaborative settings where
+        diverse ideas converge, and I embrace challenges as a chance to grow, adapt, and make an impact.
+      </p>
+
+      <p>
+        My goal is to leverage technology not just to streamline processes, but to create
+        forward-thinking solutions that shape the future of finance.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <div class="skills-wrapper">
+
+      <!-- Coding & Programming -->
+      <div class="skills-category">
+        <h3>Coding & Programming Languages</h3>
+
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML">
+          <span>HTML</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS">
+          <span>CSS</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript">
+          <span>JavaScript</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python">
+          <span>Python</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/6132/6132221.png" alt="C#">
+          <span>C#</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Visualization Tools -->
+      <div class="skills-category">
+        <h3>Data Visualization Tools</h3>
+
+        <div class="skill-item">
+          <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau Prep Builder">
+          <span>Tableau Prep Builder</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau">
+          <span>Tableau</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Management -->
+      <div class="skills-category">
+        <h3>Data Management</h3>
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/4492/4492311.png" alt="SQL">
+          <span>SQL</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cloud Computing -->
+      <div class="skills-category">
+        <h3>Cloud Computing & Deployment</h3>
+
+        <div class="skill-item">
+          <img src="https://img.icons8.com/color/48/amazon-web-services.png" alt="AWS">
+          <span>AWS</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/873/873107.png" alt="Azure">
+          <span>Azure</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- UI/UX -->
+      <div class="skills-category">
+        <h3>UI/UX Design & Prototyping Tools</h3>
+
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" alt="Figma">
+          <span>Figma</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://img.icons8.com/?size=100&id=iWw83PVcBpLw&format=png&color=000000" alt="Canva">
+          <span>Canva</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Office Tools -->
+      <div class="skills-category">
+        <h3>Office Tools</h3>
+
+        <div class="skill-item">
+          <img src="https://img.icons8.com/color/48/microsoft-word-2019--v2.png" alt="Microsoft Word">
+          <span>Microsoft Word</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://img.icons8.com/color/48/microsoft-excel-2019--v2.png" alt="Microsoft Excel">
+          <span>Microsoft Excel</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://img.icons8.com/color/48/microsoft-powerpoint-2019--v2.png" alt="Microsoft PowerPoint">
+          <span>Microsoft PowerPoint</span>
+          <div class="dots">
+            <span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <h2 style="margin-bottom: 50px; text-align: center;">Soft Skills</h2>
+    <br>
+
+    <div class="skills-wrapper" style="max-width:900px;">
+      <div class="skills-category">
+        <div class="skill-item">
+          <img src="https://img.icons8.com/color/48/conference-call.png" alt="Communication">
+          <span>Communication</span>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/2620/2620611.png" alt="Problem solving">
+          <span>Problem solving</span>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://img.icons8.com/color/48/groups.png" alt="Teamwork">
+          <span>Teamwork and collaboration</span>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://img.icons8.com/color/48/alarm-clock.png" alt="Time management">
+          <span>Time management</span>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/3503/3503786.png" alt="Attention to detail">
+          <span>Attention to detail</span>
+        </div>
+
+        <div class="skill-item">
+          <img src="https://img.icons8.com/color/48/shuffle.png" alt="Adaptability">
+          <span>Adaptability</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    #skills {
+      background: #f8f9fa;
+      padding: 70px 50px;
+    }
+
+    #skills h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #2c3e50;
+    }
+
+    .skills-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 70px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .skills-category h3 {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #2c3e50;
+      display: inline-block;
+      padding-bottom: 5px;
+      color: #2c3e50;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      gap: 10px;
+    }
+
+    .skill-item img {
+      width: 35px;
+      height: 35px;
+      object-fit: contain;
+    }
+
+    .skill-item span {
+      flex: 0 0 auto;
+      margin-right: 10px;
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+      margin-left: 0;
+    }
+
+    .dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      background: #dcdde1;
+    }
+
+    .dots span.filled {
+      background: #6c5ce7;
+    }
+  </style>
+
+  <section id="certificates">
+    <h2>Certificates</h2>
+    <div class="certificate-slider">
+      <span class="arrow left" onclick="prevCertificate()">&#10094;</span>
+
+      <div class="certificate">
+        <h3 id="certificateTitle">Certificate 1</h3>
+        <img id="certificateImage" src="https://via.placeholder.com/800x600" alt="Certificate">
+      </div>
+
+      <span class="arrow right" onclick="nextCertificate()">&#10095;</span>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-container">
+
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-media">
+          <img src="Tableau2.JPG" alt="Business Analytics Project" class="project-img">
+        </div>
+        <div class="project-content">
+          <h3>01 Business Analytics Project</h3>
+
+          <p>
+            <strong>Objective:</strong> To analyse and visualise food wastage patterns within the U.S. retail sector in order to
+            identify key contributors, trends, and areas for potential improvement.
+          </p>
+
+          <p>
+            <strong>My Contribution:</strong>
+            Identified and sourced relevant datasets related to food wastage in the retail sector.
+            Cleaned and prepared the raw data using Tableau Prep Builder, then designed interactive
+            dashboards in Tableau to visualise food wastage across retail sub-sectors, highlight areas
+            with high wastage, and present potential solution-focused insights.
+          </p>
+
+          <p>
+            <strong>Outcome:</strong> The dashboard highlighted major sources of food wastage within the U.S. retail sector,
+            enabling data-driven insights through interactive filters and charts, while also
+            identifying potential solutions for high-wastage sub-sectors.
+          </p>
+
+          <h4>Tools Used: Tableau Prep Builder, Tableau, Microsoft Excel</h4>
+
+          <a href="BAPJ Final Project Report (2).pdf" class="download-btn" download>Download This Project</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-media">
+          <img src="App1.JPG" alt="E-Electronics Website" class="project-img">
+        </div>
+        <div class="project-content">
+          <h3>02 E-Electronics Website</h3>
+
+          <p>
+            <strong>Objective:</strong> To design and develop a web-based platform that promotes sustainability by enabling users
+            to buy electronics made from recycled materials and sell their used electronic devices.
+          </p>
+
+          <p>
+            <strong>My Contribution:</strong>
+            As part of a group project, I was responsible for implementing key front-end and functional
+            components of the website. This included developing the user login and account creation
+            features, designing the shopping page using HTML and CSS, and creating additional pages
+            such as the game feature, feedback page, and About Us page to enhance user engagement and
+            overall usability.
+          </p>
+
+          <p>
+            <strong>Outcome:</strong> The completed website provided a user-friendly platform that supports sustainable
+            e-commerce by facilitating the buying and selling of recycled electronics, while offering
+            interactive features that improved user experience and encouraged user participation.
+          </p>
+
+          <h4>Tools Used: HTML, CSS, Python, JavaScript</h4>
+
+          <a href="App development Assigment (2).zip" download class="download-btn">Download This Project</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-media">
+          <img src="Ratio1.JPG" class="project-img" alt="CapitaLand Ratios Page 1">
+          <img src="Ratio2.JPG" class="project-img" alt="CapitaLand Ratios Page 2">
+        </div>
+        <div class="project-content">
+          <h3>03 Financial Management Project</h3>
+
+          <p>
+            <strong>Objective:</strong>
+            To analyse the financial performance of CapitaLand and evaluate its profitability,
+            liquidity, efficiency, and overall financial health based on publicly reported data.
+          </p>
+
+          <p>
+            <strong>My Contribution:</strong>
+            Conducted financial calculations using key accounting formulas such as profitability ratios,
+            liquidity ratios, asset utilisation ratios, and leverage indicators. Interpreted financial
+            trends, compared performance across financial periods, and assessed CapitaLand’s ability to
+            manage assets, obligations, and growth.
+          </p>
+
+          <p>
+            <strong>Outcome:</strong>
+            The analysis provided data-driven insights into CapitaLand’s financial strength and operational
+            efficiency, highlighting core areas of stability and opportunities for improvement, and supporting
+            informed evaluation of the firm's financial position.
+          </p>
+
+          <h4>Tools Used: Microsoft Excel, Financial Statements</h4>
+          <a href="Financial Management Presentation ICA1.pdf" download class="download-btn">Download This Project</a>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card">
+        <div class="project-media">
+          <img src="Azure1.JPG" class="project-img" alt="Azure DevOps Project">
+        </div>
+        <div class="project-content">
+          <h3>04 Agile Software Engineering Project</h3>
+
+          <p>
+            <strong>Objective:</strong> To apply Agile Scrum principles to plan and design a personal finance budgeting tool using Microsoft Azure DevOps.
+            The project aimed to improve financial awareness for digital banking users through budgeting, insights, and goal-setting features.
+          </p>
+
+          <p>
+            <strong>My Contribution:</strong>
+            Collaborated with a four-member Scrum team to create the Product Vision Statement,
+            contributed to developing and prioritizing Product Backlog Items (PBIs),
+            wrote five detailed user stories with INVEST-compliant acceptance criteria,
+            estimated story points using planning poker, and built Sprint 1 backlog tasks in Azure DevOps.
+          </p>
+
+          <p>
+            <strong>Outcome:</strong> Successfully structured the first release plan and Sprint 1 execution workflow.
+            The backlog and sprint tasks enabled clear project visibility and execution alignment, demonstrating effective teamwork and Agile practices.
+          </p>
+
+          <h4>Tools Used: Azure DevOps, Microsoft Excel</h4>
+
+          <a href="azure-project.zip" download class="download-btn">Download This Project</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    const certificates = [
+      { title: "IBM SkillsBuild: Cybersecurity Fundamentals", image: "Completion Certificate _ SkillsBuild_page-0001.jpg" },
+      { title: "IBM SkillsBuild: Web Development Fundamentals", image: "Completion Certificate_WebDev_page-0001.jpg" },
+      { title: "Ethereum Learner", image: "Ethereum_Learner_Certificate.png" },
+      { title: "Nets QR Web", image: "NETS_QR_WEB_page.jpg" },
+    ];
+
+    let currentIndex = 0;
+
+    function showCertificate(index) {
+      document.getElementById("certificateTitle").textContent = certificates[index].title;
+      document.getElementById("certificateImage").src = certificates[index].image;
+    }
+
+    function prevCertificate() {
+      currentIndex = (currentIndex - 1 + certificates.length) % certificates.length;
+      showCertificate(currentIndex);
+    }
+
+    function nextCertificate() {
+      currentIndex = (currentIndex + 1) % certificates.length;
+      showCertificate(currentIndex);
+    }
+
+    showCertificate(currentIndex);
+  </script>
+</body>
+</html>
